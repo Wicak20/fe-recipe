@@ -2,11 +2,12 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
+import { confirmAlert } from "react-confirm-alert";
 import Alert from "./../../components/Alert"
 import './index.css'
 
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMjI3NTE5LCJleHAiOjE2OTEzMTM5MTl9.w056Igm5z4-RNrSd9cj53IzkpkSisCNVw9AyM3s7B4A'
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMzQzOTYwLCJleHAiOjE2OTE0MzAzNjB9.AZ7NV_Y8LalhLQrRrB3A8hPAlcKUq1cw68kwyIbaSIU'
 
 export default function Menu() {
     const [data, setData] = useState(null)
@@ -21,7 +22,7 @@ export default function Menu() {
     })
 
     const getData = () => {
-        axios.get(`http://localhost:3000/recipe?page=${currentPage}&&limit=5&sort=ASC&sortBy=id`, {
+        axios.get(`http://localhost:3000/recipe/byuserid?page=${currentPage}&&limit=5&sort=ASC&sortBy=id`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -40,8 +41,7 @@ export default function Menu() {
             })
             .catch((err) => {
                 console.log(err)
-                setAlertData({ type: "danger", message: `${err}` })
-                toast.error(err)
+                toast.error(`${err}`)
             })
     }
 
@@ -49,24 +49,40 @@ export default function Menu() {
         getData()
     }, [currentPage])
 
-    const deleteData = (id) => {
-        axios.delete(`http://localhost:3000/recipe/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res)
-                getData()
-                setAlertData({ ...alertData, type: "warning", message: "berhasil hapus data" })
-                setShowAlert(true)
-            })
-            .catch((err) => {
-                console.log(err)
-                getData()
-                setAlertData({ ...alertData, type: "danger", message: err.response.data.message })
-                setShowAlert(true)
-            })
+    const deleteData = (item) => {
+        confirmAlert({
+            title: 'Delete recipe ',
+            message: `Are you sure you want to delete "${item.title}"`,
+            buttons: [
+                {
+                    label: "Delete",
+                    onClick: () => {
+                        axios.delete(`http://localhost:3000/recipe/${item.id}`, {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        })
+                            .then((res) => {
+                                console.log(res)
+                                getData()
+                                setAlertData({ ...alertData, type: "warning", message: "berhasil hapus data" })
+                                setShowAlert(true)
+                            })
+                            .catch((err) => {
+                                console.log(err)
+                                getData()
+                                setAlertData({ ...alertData, type: "danger", message: err.response.data.message })
+                                setShowAlert(true)
+                            })
+                    }
+                },
+                {
+                    label: "Cancel",
+                    onClick: () => toast.warning('Delete Cancelled')
+                }
+            ]
+        });
+
     }
 
 
@@ -154,10 +170,14 @@ export default function Menu() {
                         return (
                             <div key={item.id} className="card border-light mb-3" style={{ maxWidth: 540 }}>
                                 <div className="row g-0">
-                                    <div className="col-md-5">
+                                    <div className="col-md-5" style={{ objectFit: 'cover' }}>
                                         <img
                                             src={item.photo}
                                             className="img-fluid rounded-start"
+                                            style={{
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
                                             alt="..."
                                         />
                                     </div>
@@ -177,9 +197,9 @@ export default function Menu() {
                                             </button>
                                             <div className="btn-option">
                                                 <Link to={`/update-menu/${item.id}`}>
-                                                    <button className="btn btn-sm btn-primary" >Edit Menu</button>
+                                                    <button className="btn btn-sm btn-primary me-3" >Edit Menu</button>
                                                 </Link>
-                                                <button className="btn btn-sm btn-danger">Delete Menu</button>
+                                                <button onClick={() => deleteData(item)} className="btn btn-sm btn-danger">Delete Menu</button>
                                             </div>
                                         </div>
                                     </div>

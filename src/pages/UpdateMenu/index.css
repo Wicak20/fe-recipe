@@ -37,11 +37,14 @@
 
 /*  CSS NAVBAR END  */
 
+.input-menu {
+    margin: auto;
+    width: 70vw;
+}
+
 .change-photo {
-    width: 600px;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 55vw;
+    margin: auto;
     margin-top: 100px;
 }
 
@@ -53,8 +56,11 @@
 
 .change-photo label {
     position: absolute;
-    left: 720px;
-    top: 340px;
+    top: 40vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    backdrop-filter: blur(6px);
 }
 
 .add-image {
@@ -66,7 +72,7 @@
 }
 
 .add-title input {
-    width: 758px;
+    width: 70vw;
     padding: 15px;
     height: 52px;
     border: 1px solid white;
@@ -79,7 +85,7 @@
 }
 
 .add-ingredients textarea {
-    width: 758px;
+    width: 70vw;
     padding: 15px;
     border: 1px solid white;
     border-radius: 10px;
@@ -88,7 +94,6 @@
 
 .select-category {
     margin-top: 20px;
-    margin-left: -575px;
 }
 
 .select-category select {

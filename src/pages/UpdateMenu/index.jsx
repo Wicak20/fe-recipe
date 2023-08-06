@@ -2,10 +2,11 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import './index.css'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMjI3NTE5LCJleHAiOjE2OTEzMTM5MTl9.w056Igm5z4-RNrSd9cj53IzkpkSisCNVw9AyM3s7B4A'
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMzQzOTYwLCJleHAiOjE2OTE0MzAzNjB9.AZ7NV_Y8LalhLQrRrB3A8hPAlcKUq1cw68kwyIbaSIU'
 
 
 export default function UpdateMenu() {
@@ -61,7 +62,7 @@ export default function UpdateMenu() {
         bodyFormData.append("title", inputData.title)
         bodyFormData.append("ingredients", inputData.ingredients)
         bodyFormData.append("category_id", inputData.category_id)
-        bodyFormData.append("photo", photo)
+        bodyFormData.append("image", photo)
 
         console.log(bodyFormData)
 
@@ -73,9 +74,13 @@ export default function UpdateMenu() {
         })
             .then((res) => {
                 console.log(res)
+                toast.success('Recipe Updated')
+
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err);
+                toast.error(err.message)
+
             })
     }
 
@@ -87,7 +92,7 @@ export default function UpdateMenu() {
         console.log(inputData)
     }
     const onChangePhoto = (e) => {
-        setPhoto(e.target.files[0])
+        e.target.files[0] && setPhoto(e.target.files[0])
         e.target.files[0] && setInputData({ ...inputData, photo_url: URL.createObjectURL(e.target.files[0]) })
         console.log(e.target.files)
 
@@ -95,15 +100,16 @@ export default function UpdateMenu() {
 
     return (
         <div className="container" style={{ backgroundColor: "white" }}>
+            <ToastContainer />
             <div className="border-image">
                 <div className="container text-center">
                     <div className="row align-items-start">
                         <div className="col">
-                            <form className="input-menu">
+                            <form className="input-menu" onSubmit={postData} >
                                 <div className="change-photo">
-                                    <img src="/EditMenu/asset/Rectangle 313.svg" />
+                                    <img src={inputData.photo_url} className='img-fluid' />
                                     <label>
-                                        <input type="file" style={{ display: "none" }} />
+                                        <input name='photo' type="file" onChange={onChangePhoto} style={{ display: "none" }} />
                                         <a className="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                                             Add Photo
                                         </a>
@@ -124,7 +130,7 @@ export default function UpdateMenu() {
                                         />
                                     </label>
                                 </div>
-                                <div className="select-category">
+                                <div className="d-flex select-category">
                                     <select name="category" id="1">
                                         {category.map((item, index) => {
                                             return (
@@ -141,7 +147,7 @@ export default function UpdateMenu() {
                                             border: "1px solid #EFC81A",
                                             marginTop: 25
                                         }}
-                                        type="button"
+                                        type="submit"
                                     >
                                         Update
                                     </button>

@@ -3,6 +3,7 @@ import { Navigate, Route, Routes, BrowserRouter, Link, useParams } from 'react-r
 import Menu from './pages/Menu'
 import UpdateMenu from './pages/UpdateMenu'
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 function App() {
   const [count, setCount] = useState(0)
