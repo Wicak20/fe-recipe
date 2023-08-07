@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMzQzOTYwLCJleHAiOjE2OTE0MzAzNjB9.AZ7NV_Y8LalhLQrRrB3A8hPAlcKUq1cw68kwyIbaSIU'
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
 
 
 export default function UpdateMenu() {
@@ -158,24 +158,5 @@ export default function UpdateMenu() {
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-        // <div className='container'>
-        //     <h1>Input Menu</h1>
-        //     <form onSubmit={postData} className='row col-6 gap-2'>
-        //         <input type="text" name='title' value={inputData.title} className='form-control col-4' onChange={onChange} placeholder='title' />
-        //         <input type="text" name='ingredients' value={inputData.ingredients} className='form-control col-4' onChange={onChange} placeholder='ingredients' />
-        //         <input type="file" name='photo' className='form-control col-4' onChange={onChangePhoto} placeholder='photo' />
-
-        //         <img src={inputData.photo_url} width={200} />
-
-        //         <button type='submit' className='btn btn-warning'>Update Menu</button>
-
-        //     </form>
-        // </div>
     )
 }

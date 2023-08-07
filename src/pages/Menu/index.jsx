@@ -4,10 +4,11 @@ import { Link, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import { confirmAlert } from "react-confirm-alert";
 import Alert from "./../../components/Alert"
+import Navbar from "./../../components/Navbar"
 import './index.css'
 
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxMzQzOTYwLCJleHAiOjE2OTE0MzAzNjB9.AZ7NV_Y8LalhLQrRrB3A8hPAlcKUq1cw68kwyIbaSIU'
+let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
 
 export default function Menu() {
     const [data, setData] = useState(null)
@@ -91,6 +92,7 @@ export default function Menu() {
 
             <>
                 <ToastContainer autoClose={1000} />
+                <Navbar />
                 <div className="mt-5">
                     <div className="container">
                         <div className="d-flex justify-content-between mb-5">
