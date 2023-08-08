@@ -6,6 +6,7 @@ import Menu from './pages/Menu'
 import UpdateMenu from './pages/UpdateMenu'
 import AddMenu from './pages/InputMenu';
 import SearchMenu from './pages/SearchMenu';
+import MenuById from './pages/SearchMenu/_id';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
           <Route path='/update-menu/:menuId' element={<UpdateMenu />} />
           <Route path='/input-menu' element={<AddMenu />} />
           <Route path='/search-menu' element={<SearchMenu />} />
+          <Route path='/detail-menu/:id' element={<MenuById />} />
           {/* <Route path='/menu-detail/:menuId' element={<MenuDetail />} />
         <Route path='/inputmenu' element={<InputMenu />} /> */}
         </Routes>

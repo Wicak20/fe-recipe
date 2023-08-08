@@ -146,7 +146,9 @@ export default function SearchMenu() {
                                                 </div>
                                                 <div className="col-md-8">
                                                     <div className="card-body">
-                                                        <h5 className="card-title">{item.title}</h5>
+                                                        <Link className="text-decoration-none text-black" to={`/detail-menu/${item.id}`}>
+                                                            <h5 className="card-title">{item.title}</h5>
+                                                        </Link>
                                                         <p className="card-text">
                                                             ingredient:
                                                             <br />
