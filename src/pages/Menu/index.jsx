@@ -106,7 +106,7 @@ export default function Menu() {
                                 >
                                     <div className="d-flex ms-2">
                                         <img
-                                            src="/Detail Profil/asset/ilham.JPG.jpeg"
+                                            src="./../../src/assets/pic-oke.jpeg"
                                             className="rounded-circle "
                                             alt="profile"
                                             style={{ width: 40 }}

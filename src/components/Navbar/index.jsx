@@ -25,7 +25,7 @@ class Navbar extends React.Component {
                         />
                     </div>
                     <div className="col ml-3">
-                        <div>Wicak</div>
+                        <div>Ilham</div>
                         <div className="logout">Logout</div>
                     </div>
                 </div>

@@ -1,6 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router'
+import { ToastContainer, toast } from 'react-toastify';
+import Navbar from "./../../components/Navbar"
+import './_id.css'
 
 let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
 
@@ -18,11 +21,13 @@ function MenuById() {
             .then((res) => {
                 console.log(res)
                 setData(res.data.data)
+                toast.success('Berhasil Detail Recipe')
 
 
             })
             .catch((err) => {
                 console.log(err)
+                toast.error(`${err}`)
             })
     }
 
@@ -33,6 +38,8 @@ function MenuById() {
 
     return (
         <>
+            <ToastContainer autoClose={1000} />
+            <Navbar />
             <div className="mt-5">
                 <div className="container">
                     <div className="d-flex justify-content-between">
@@ -46,7 +53,7 @@ function MenuById() {
                             >
                                 <div className="d-flex ms-2">
                                     <img
-                                        src="/Detail Profil/asset/ilham.JPG.jpeg"
+                                        src="./../../src/assets/pic-oke.jpeg"
                                         className="rounded-circle "
                                         alt="profile"
                                         style={{ width: 40 }}
@@ -91,10 +98,10 @@ function MenuById() {
                         </div>
                         <div className="d-flex gap-3 mb-5">
                             <button className="icon-button-1">
-                                <img src="/Detail Menu/asset/bookmark.svg" alt="Gambar 1" />
+                                <img src="./../../src/assets/bookmark.svg" alt="Gambar 1" />
                             </button>
                             <button className="icon-button-2">
-                                <img src="/Detail Menu/asset/Vector.svg" alt="Gambar 2" />
+                                <img src="/./../../src/assets/Vector.svg" alt="Gambar 2" />
                             </button>
                         </div>
                         <div
@@ -105,7 +112,7 @@ function MenuById() {
                                 <div className="me-4">
                                     <div className="d-flex ms-2">
                                         <img
-                                            src="/Detail Profil/asset/ilham.JPG.jpeg"
+                                            src="/./../../src/assets/pic-oke.jpeg"
                                             className="rounded-circle "
                                             alt="profile"
                                             style={{ width: 40 }}
@@ -138,7 +145,7 @@ function MenuById() {
                                 <div className="me-4">
                                     <div className="d-flex ms-2">
                                         <img
-                                            src="/Detail Profil/asset/ilham.JPG.jpeg"
+                                            src="./../../src/assets/pic-oke.jpeg"
                                             className="rounded-circle "
                                             alt="profile"
                                             style={{ width: 40 }}
@@ -196,6 +203,25 @@ function MenuById() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div className="container-fluid">
+                <div className="footer">
+                    <div className="footer-mid">
+                        <div style={{ fontSize: "5vw", fontStyle: "bolder" }}>
+                            Eat, Cook, Repeat
+                        </div>
+                        <div style={{ fontSize: "1.8vw" }}>
+                            Share your best recipe by uploading here !
+                        </div>
+                    </div>
+                    <div className="footer-bottom">
+                        <span className="footer-bottom-item">Product</span>
+                        <span className="footer-bottom-item">Company</span>
+                        <span className="footer-bottom-item">Learn More</span>
+                        <span className="footer-bottom-item">Get In Touch</span>
+                    </div>
+                    <div className="arkademy">@Arkademy</div>
                 </div>
             </div>
 
