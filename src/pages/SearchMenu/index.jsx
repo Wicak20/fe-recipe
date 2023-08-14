@@ -7,9 +7,6 @@ import Alert from "./../../components/Alert"
 import Navbar from "./../../components/Navbar"
 import './index.css'
 
-
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
-
 export default function SearchMenu() {
     const [data, setData] = useState(null)
     const [pagination, setPagination] = useState({ totalData: 0, totalPage: 0, pageNow: 0 })
@@ -17,9 +14,11 @@ export default function SearchMenu() {
     const [startData, setStartData] = useState(0)
     const [endData, setEndData] = useState(5)
     const [searchKeyword, setSeachKeyword] = useState("")
+    const token = localStorage.getItem('logintoken')
+
 
     const getData = () => {
-        axios.get(`http://localhost:3000/recipe?page=${currentPage}&&limit=5&sort=ASC&sortBy=id${searchKeyword && `&searchRecipe=${searchKeyword}&searchBy=ingredients`}`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/recipe?page=${currentPage}&&limit=5&sort=ASC&sortBy=id${searchKeyword && `&searchRecipe=${searchKeyword}&searchBy=ingredients`}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49,7 +48,7 @@ export default function SearchMenu() {
     const searchMenu = (event) => {
         event.preventDefault()
         setCurrentPage(1)
-        axios.get(`http://localhost:3000/recipe?page=${currentPage}&&limit=5&sort=ASC&sortBy=id&searchRecipe=${searchKeyword}&searchBy=ingredients`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/recipe?page=${currentPage}&&limit=5&sort=ASC&sortBy=id&searchRecipe=${searchKeyword}&searchBy=ingredients`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

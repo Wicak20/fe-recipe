@@ -8,8 +8,6 @@ import Navbar from "./../../components/Navbar"
 import './index.css'
 
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
-
 export default function Menu() {
     const [data, setData] = useState(null)
     const [pagination, setPagination] = useState({ totalData: 0, totalPage: 0, pageNow: 0 })
@@ -22,8 +20,12 @@ export default function Menu() {
         message: ""
     })
 
+    const token = localStorage.getItem('logintoken')
+
+
+
     const getData = () => {
-        axios.get(`http://localhost:3000/recipe/byuserid?page=${currentPage}&&limit=5&sort=ASC&sortBy=id`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/recipe/byuserid?page=${currentPage}&&limit=5&sort=ASC&sortBy=id`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -58,7 +60,7 @@ export default function Menu() {
                 {
                     label: "Delete",
                     onClick: () => {
-                        axios.delete(`http://localhost:3000/recipe/${item.id}`, {
+                        axios.delete(`${import.meta.env.VITE_API_URL}/recipe/${item.id}`, {
                             headers: {
                                 Authorization: `Bearer ${token}`
                             }
@@ -106,7 +108,7 @@ export default function Menu() {
                                 >
                                     <div className="d-flex ms-2">
                                         <img
-                                            src="./../../src/assets/pic-oke.jpeg"
+                                            src={localStorage.getItem("photo") !== 'null' ? localStorage.getItem("photo") : "https://www.whitechapelgallery.org/wp-content/uploads/2020/07/blank-head-profile-pic-for-a-man.jpg"}
                                             className="rounded-circle "
                                             alt="profile"
                                             style={{ width: 40 }}
@@ -120,7 +122,7 @@ export default function Menu() {
                                             className="text-black"
                                             style={{ textDecoration: "none" }}
                                         >
-                                            Ilham
+                                            {localStorage.getItem('username')}
                                         </a>
                                     </h6>
                                     <p className="mb-0 text-start fw-bold">10 Recipes</p>
@@ -141,7 +143,6 @@ export default function Menu() {
                                             <li className="nav-item">
                                                 <a
                                                     className="nav-link active text-body-secondary fw-bold"
-                                                    href="#"
                                                 >
                                                     Recipes
                                                 </a>
@@ -149,13 +150,12 @@ export default function Menu() {
                                             <li className="nav-item">
                                                 <a
                                                     className="nav-link text-body-secondary"
-                                                    href="./detail-profile-bookmark.html"
                                                 >
                                                     Bookmarked
                                                 </a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link text-body-secondary" href="#">
+                                                <a className="nav-link text-body-secondary">
                                                     Liked
                                                 </a>
                                             </li>
@@ -185,7 +185,9 @@ export default function Menu() {
                                     </div>
                                     <div className="col-md-7 ">
                                         <div className="card-body">
-                                            <h5 className="card-title">{item.title}</h5>
+                                            <Link className="text-decoration-none text-black" to={`/detail-menu/${item.id}`}>
+                                                <h5 className="card-title">{item.title}</h5>
+                                            </Link>
                                             <p className="mb-0">Ingredient</p>
                                             <p className="card-text">
                                                 {item.ingredients}

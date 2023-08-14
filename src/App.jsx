@@ -7,6 +7,9 @@ import UpdateMenu from './pages/UpdateMenu'
 import AddMenu from './pages/InputMenu';
 import SearchMenu from './pages/SearchMenu';
 import MenuById from './pages/SearchMenu/_id';
+import Login from './pages/Login';
+import LandingPage from './pages/LandingPage';
+import Register from './pages/Registrasi';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +18,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Navigate to="/menu" replace={true} />} />
+          <Route path='/' element={<Navigate to="/landing-page" replace={true} />} />
+          <Route path='/landing-page' element={<LandingPage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/menu' element={<Menu />} />
           <Route path='/update-menu/:menuId' element={<UpdateMenu />} />
           <Route path='/input-menu' element={<AddMenu />} />

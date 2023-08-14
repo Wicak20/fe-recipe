@@ -1,0 +1,165 @@
+@font-face {
+    font-family: "cereal";
+    src: url("AirbnbCereal_W_Md.otf");
+}
+
+.navbar {
+    font-size: 18px;
+    color: #2E266F;
+    /* position: absolute; */
+    /* left: 2%; */
+    /* width: 90vw; */
+}
+
+.navbar-item {
+    margin-right: 10px;
+}
+
+.navbar-item:hover {
+    text-decoration: underline;
+    color: #1E238F;
+    cursor: pointer;
+}
+
+.navbar-photo {
+    width: 64px;
+    border-radius: 100%;
+}
+
+.profile-divider {
+    border-left: 5px solid #EFC81A;
+}
+
+.logout {
+    font-weight: bolder;
+}
+
+/*  CSS NAVBAR END  */
+
+.landing-page-main {
+    font-family: cereal;
+    padding-left: 5%
+}
+
+/*  CSS NAVBAR END  */
+
+.discover {
+    font-size: 4vw;
+    color: #2E266F;
+    background: linear-gradient(90deg, #FFF 70%, #EFC81A 50%);
+    padding: 100px 0;
+}
+
+.discover-img {
+    padding: 50px 50px 0 0;
+}
+
+.search-resto {
+    background-color: #EFEFEF;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1vw;
+    width: 70%;
+    height: 4vw;
+
+}
+
+.search-resto::placeholder {
+    color: #B6B6B6 !important;
+    opacity: 1;
+}
+
+.popular-title,
+.recipe-title {
+    font-size: 2vw;
+    color: #3F3A3A;
+    border-left: 1vw solid #EFC81A;
+    padding: 1vw 0;
+}
+
+.popular-title {
+    margin: -4vw 0 4vw 0;
+}
+
+.recipe-title {
+    margin: 4vw 0;
+
+}
+
+.btn-landing-page {
+    background-color: #EFC81A;
+    color: #fff;
+    font-size: 1vw;
+    padding: 1.25vw 4vw;
+}
+
+.pocipe-wrapper {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.pocipe-item {
+    position: relative;
+    display: inline-block;
+    max-width: 300px;
+    margin: 15px;
+}
+
+.pocipe-text {
+    position: absolute;
+    font-size: 18px;
+    bottom: 20px;
+    left: 20px;
+}
+
+
+@media screen and (max-width: 426px) {
+    .pocipe-item {
+        max-width: 150px;
+        margin: 5px;
+    }
+
+    .pocipe-text {
+        font-size: 15px;
+        bottom: 10px;
+        left: 1em;
+    }
+}
+
+
+
+/* CSS FOR FOOTER */
+
+.footer {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    background-color: #EFC81A;
+    padding: 2vw;
+    color: #2E266F;
+    font-weight: 100;
+
+}
+
+.footer-mid {
+    padding: 10vw;
+    text-align: center;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-bottom-item {
+    margin-right: 10px;
+    font-size: 1.5vw;
+}
+
+.arkademy {
+    color: black;
+    position: absolute;
+    font-size: 1.5vw;
+    bottom: 20px;
+    right: 20px;
+}

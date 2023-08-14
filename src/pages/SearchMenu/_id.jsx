@@ -5,15 +5,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import Navbar from "./../../components/Navbar"
 import './_id.css'
 
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
-
 function MenuById() {
     const { id } = useParams()
     const [data, setData] = useState(null)
+    const token = localStorage.getItem('logintoken')
 
 
     const getData = () => {
-        axios.get(`http://localhost:3000/recipe/${id}`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/recipe/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

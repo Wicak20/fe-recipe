@@ -1,13 +1,8 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import './index.css'
 import { ToastContainer, toast } from 'react-toastify';
-
-
-
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
-
 
 export default function UpdateMenu() {
     const { menuId } = useParams()
@@ -19,9 +14,11 @@ export default function UpdateMenu() {
         category_id: "1",
         photo_url: ""
     })
+    const token = localStorage.getItem('logintoken')
+
 
     const getData = () => {
-        axios.get(`http://localhost:3000/recipe/${menuId}`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/recipe/${menuId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -36,7 +33,7 @@ export default function UpdateMenu() {
     }
 
     const getCategory = () => {
-        axios.get(`http://localhost:3000/category`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/category`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -66,7 +63,7 @@ export default function UpdateMenu() {
 
         console.log(bodyFormData)
 
-        axios.put(`http://localhost:3000/recipe/${menuId}`, bodyFormData, {
+        axios.put(`${import.meta.env.VITE_API_URL}/recipe/${menuId}`, bodyFormData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": 'multipart/form-data'

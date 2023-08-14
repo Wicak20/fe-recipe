@@ -7,11 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "./../../components/Navbar"
 
 
-
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbWF0MkBnbWFpbC5jb20iLCJpZCI6OCwiaWF0IjoxNjkxNDMxMzIzLCJleHAiOjE2OTE1MTc3MjN9.xHUoxLSb6PJAer2bmQchaV1xDZgwOTpzC_iJp-morvU'
-
-
-
 export default function AddMenu() {
     const navigate = useNavigate();
     const [photo, setPhoto] = useState(null)
@@ -22,16 +17,18 @@ export default function AddMenu() {
         category_id: "1",
         photo_url: ""
     })
+    const token = localStorage.getItem('logintoken')
+
 
     const getCategory = () => {
-        axios.get(`http://localhost:3000/category`, {
+        axios.get(`${import.meta.env.VITE_API_URL}/category`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
             .then((res) => {
-                console.log(res.data.data)
-                setCategory(res.data.data)
+
+                if (res.data.data) { setCategory(res.data.data) }
             })
             .catch((err) => {
                 console.log(err)
@@ -54,7 +51,7 @@ export default function AddMenu() {
             return toast.error('Please add photo first!')
         }
 
-        axios.post(`http://localhost:3000/recipe`, bodyFormData, {
+        axios.post(`${import.meta.env.VITE_API_URL}/recipe`, bodyFormData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": 'multipart/form-data'
