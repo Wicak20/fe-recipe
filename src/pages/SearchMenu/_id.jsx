@@ -4,35 +4,49 @@ import { useParams } from 'react-router'
 import { ToastContainer, toast } from 'react-toastify';
 import Navbar from "./../../components/Navbar"
 import './_id.css'
+import { detailMenuId } from "../../redux/actions/menu";
+import { useDispatch, useSelector } from "react-redux";
 
 function MenuById() {
     const { id } = useParams()
     const [data, setData] = useState(null)
     const token = localStorage.getItem('logintoken')
+    const dispatch = useDispatch()
+    const { dataMenuById, errorMessage, isError } = useSelector((state) => state.detailMenu);
 
 
-    const getData = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/recipe/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res)
-                setData(res.data.data)
-                toast.success('Berhasil Detail Recipe')
+    // const getData = () => {
+    //     axios.get(`${import.meta.env.VITE_API_URL}/recipe/${id}`, {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    //         .then((res) => {
+    //             console.log(res)
+    //             setData(res.data.data)
+    //             toast.success('Berhasil Detail Recipe')
 
 
-            })
-            .catch((err) => {
-                console.log(err)
-                toast.error(`${err}`)
-            })
-    }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //             toast.error(`${err}`)
+    //         })
+    // }
 
     useEffect(() => {
-        getData()
+        dispatch(detailMenuId(id, token))
     }, [])
+
+    useEffect(() => {
+        setData(dataMenuById)
+    }, [dataMenuById])
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(`${errorMessage}`)
+        }
+    }, [errorMessage, isError])
 
 
     return (

@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import './index.css'
 import { ToastContainer, toast } from 'react-toastify';
+import { detailMenuId, getAllCategory, updateMenu } from "../../redux/actions/menu";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function UpdateMenu() {
     const { menuId } = useParams()
@@ -12,46 +15,38 @@ export default function UpdateMenu() {
         title: "",
         ingredients: "",
         category_id: "1",
-        photo_url: ""
+        photo: ""
     })
     const token = localStorage.getItem('logintoken')
+    const dispatch = useDispatch()
+    const { dataMenuById, dataAllCategory, errorMessage, isError, isUpdateSuccess, isLoading } = useSelector((state) => state.detailMenu);
 
-
-    const getData = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/recipe/${menuId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res)
-                setInputData({ ...inputData, title: res.data.data.title, ingredients: res.data.data.ingredients, category_id: res.data.data.category_id, photo_url: res.data.data.photo })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const getCategory = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/category`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res.data.data)
-                setCategory(res.data.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
 
     useEffect(() => {
-        console.log(menuId)
-        getData()
-        getCategory()
+        dispatch(detailMenuId(menuId, token))
+        dispatch(getAllCategory(token))
     }, [])
+
+
+    useEffect(() => {
+        setInputData(dataMenuById)
+    }, [dataMenuById])
+
+    useEffect(() => {
+        setCategory(dataAllCategory)
+    }, [dataAllCategory])
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(`${errorMessage}`)
+        }
+    }, [errorMessage, isError])
+
+    useEffect(() => {
+        if (isUpdateSuccess) {
+            toast.success("Recipe Updated!")
+        }
+    }, [isUpdateSuccess])
 
     const postData = (event) => {
         event.preventDefault();
@@ -63,22 +58,7 @@ export default function UpdateMenu() {
 
         console.log(bodyFormData)
 
-        axios.put(`${import.meta.env.VITE_API_URL}/recipe/${menuId}`, bodyFormData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": 'multipart/form-data'
-            }
-        })
-            .then((res) => {
-                console.log(res)
-                toast.success('Recipe Updated')
-
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error(err.message)
-
-            })
+        dispatch(updateMenu(menuId, token, bodyFormData))
     }
 
     const onChange = (e) => {
@@ -90,7 +70,7 @@ export default function UpdateMenu() {
     }
     const onChangePhoto = (e) => {
         e.target.files[0] && setPhoto(e.target.files[0])
-        e.target.files[0] && setInputData({ ...inputData, photo_url: URL.createObjectURL(e.target.files[0]) })
+        e.target.files[0] && setInputData({ ...inputData, photo: URL.createObjectURL(e.target.files[0]) })
         console.log(e.target.files)
 
     }
@@ -104,7 +84,7 @@ export default function UpdateMenu() {
                         <div className="col">
                             <form className="input-menu" onSubmit={postData} >
                                 <div className="change-photo">
-                                    <img src={inputData.photo_url} className='img-fluid' />
+                                    <img src={inputData.photo} className='img-fluid' />
                                     <label>
                                         <input name='photo' type="file" onChange={onChangePhoto} style={{ display: "none" }} />
                                         <a className="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
@@ -138,6 +118,7 @@ export default function UpdateMenu() {
                                 </div>
                                 <div className="d-grid gap-2 col-3 mx-auto">
                                     <button
+                                        disabled={isLoading}
                                         className="btn btn-primary"
                                         style={{
                                             backgroundColor: "#EFC81A",
@@ -146,7 +127,7 @@ export default function UpdateMenu() {
                                         }}
                                         type="submit"
                                     >
-                                        Update
+                                        {isLoading ? <div className="spinner-border" role="status"></div> : "Update"}
                                     </button>
                                 </div>
                             </form>

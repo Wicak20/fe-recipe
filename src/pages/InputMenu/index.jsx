@@ -1,11 +1,12 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import './index.css'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "./../../components/Navbar"
-
+import { creatMenu, getAllCategory } from "../../redux/actions/menu";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AddMenu() {
     const navigate = useNavigate();
@@ -18,26 +19,30 @@ export default function AddMenu() {
         photo_url: ""
     })
     const token = localStorage.getItem('logintoken')
+    const dispatch = useDispatch()
+    const { dataAllCategory, errorMessage, isError, isCreated, isLoading } = useSelector((state) => state.detailMenu);
 
-
-    const getCategory = () => {
-        axios.get(`${import.meta.env.VITE_API_URL}/category`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-
-                if (res.data.data) { setCategory(res.data.data) }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
 
     useEffect(() => {
-        getCategory()
+        dispatch(getAllCategory(token))
     }, [])
+
+    useEffect(() => {
+        setCategory(dataAllCategory)
+    }, [dataAllCategory])
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(`${errorMessage}`)
+        }
+    }, [errorMessage, isError])
+
+    useEffect(() => {
+        if (isCreated) {
+            navigate('/menu')
+            toast.success("Recipe Created!")
+        }
+    }, [isCreated])
 
     const postData = (event) => {
         event.preventDefault();
@@ -47,27 +52,30 @@ export default function AddMenu() {
         bodyFormData.append("category_id", inputData.category_id)
         bodyFormData.append("image", photo)
 
+        dispatch(creatMenu(token, bodyFormData))
+
+
         if (!photo) {
             return toast.error('Please add photo first!')
         }
 
-        axios.post(`${import.meta.env.VITE_API_URL}/recipe`, bodyFormData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": 'multipart/form-data'
-            }
-        })
-            .then((res) => {
-                console.log(res)
-                navigate('/menu');
-                toast.success('Recipe Created')
+        // axios.post(`${import.meta.env.VITE_API_URL}/recipe`, bodyFormData, {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": 'multipart/form-data'
+        //     }
+        // })
+        //     .then((res) => {
+        //         console.log(res)
+        //         navigate('/menu');
+        //         toast.success('Recipe Created')
 
-            })
-            .catch((err) => {
-                console.log(err);
-                toast.error(err.message)
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //         toast.error(err.message)
 
-            })
+        //     })
     }
 
     const onChange = (e) => {
@@ -131,6 +139,7 @@ export default function AddMenu() {
                                 </div>
                                 <div className="d-grid gap-2 col-3 mx-auto">
                                     <button
+                                        disabled={isLoading}
                                         className="btn btn-primary"
                                         style={{
                                             backgroundColor: "#EFC81A",
@@ -139,7 +148,7 @@ export default function AddMenu() {
                                         }}
                                         type="submit"
                                     >
-                                        Post
+                                        {isLoading ? <div className="spinner-border" role="status"></div> : "Post"}
                                     </button>
                                 </div>
                             </form>
