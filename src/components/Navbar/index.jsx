@@ -37,7 +37,7 @@ class Navbar extends React.Component {
     }
 
     render() {
-        return <div className="navbar container-fluid mt-5 px-5">
+        return <div className="navbar container-fluid mt-2 px-5">
             <div className="col-4">
                 {this.state.token ?
                     <div className="justify-content-between d-none d-sm-flex">
@@ -71,11 +71,13 @@ class Navbar extends React.Component {
             {this.state.token && <div className="col-8  d-flex justify-content-end">
                 <div className="row profile-divider" style={{ width: "max-content" }}>
                     <div className="col account-image pl-3 d-none d-sm-flex">
-                        <img
+                        <Link to="/detail-profil/:id">
+                            <img
                             className="navbar-photo"
                             src={this.state.photo}
                             alt="profile pic"
-                        />
+                            />  
+                        </Link>
                     </div>
                     <div className="col ml-3">
                         <div>{this.state.username}</div>

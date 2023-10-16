@@ -10,6 +10,7 @@ import MenuById from './pages/SearchMenu/_id';
 import Login from './pages/Login';
 import LandingPage from './pages/LandingPage';
 import Register from './pages/Registrasi';
+import DetailProfile from './pages/DetailProfil';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
           <Route path='/input-menu' element={<AddMenu />} />
           <Route path='/search-menu' element={<SearchMenu />} />
           <Route path='/detail-menu/:id' element={<MenuById />} />
+          <Route path='/detail-profil/:id' element={<DetailProfile />} />
           {/* <Route path='/menu-detail/:menuId' element={<MenuDetail />} />
         <Route path='/inputmenu' element={<InputMenu />} /> */}
         </Routes>

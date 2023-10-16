@@ -10,6 +10,8 @@ export const loginAction = (data, navigate) => async (dispatch) => {
         localStorage.setItem("username", result.data.data.name)
         localStorage.setItem("email", result.data.data.email)
         localStorage.setItem("photo", result.data.data.image)
+        localStorage.setItem("id", result.data.data.id)
+        console.log(result.data.data.id);
 
         dispatch({ payload: result.data, type: "LOGIN_SUCCESS" })
         navigate('/')
