@@ -6,6 +6,13 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import Navbar from "./../../components/Navbar"
 import gambar from "../../assets/landingPage/Rectangle 313.svg"
+import gambar1 from "../../assets/landingPage/Rectangle 314.svg"
+import gambar2 from "../../assets/landingPage/Rectangle 315.svg"
+import gambar3 from "../../assets/landingPage/Rectangle 316.svg"
+import gambar4 from "../../assets/landingPage/Rectangle 317.svg"
+import gambar5 from "../../assets/landingPage/Rectangle 318.svg"
+import gambar6 from "../../assets/landingPage/Rectangle 319.svg"
+import gambar7 from "../../assets/landingPage/Rectangle 320.svg"
 
 
 export default function landingPage() {
@@ -38,7 +45,7 @@ export default function landingPage() {
                 <div className="col">
                     <img
                         className="popular-img img-fluid"
-                        src="./../../src/assets/landingPage/Rectangle 314.svg"
+                        src={gambar1}
                         alt="discover"
                     />
                 </div>
@@ -60,7 +67,7 @@ export default function landingPage() {
                 <div className="col">
                     <img
                         className="popular-img img-fluid"
-                        src="./../../src/assets/landingPage/Rectangle 315.svg"
+                        src={gambar2}
                         alt="discover"
                     />
                 </div>
@@ -81,7 +88,7 @@ export default function landingPage() {
             <div className="pocipe-wrapper">
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 316.svg"
+                        src={gambar3}
                         className="img-fluid"
                         alt="recipes"
                     />
@@ -92,7 +99,7 @@ export default function landingPage() {
                 </div>
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 317.svg"
+                        src={gambar4}
                         className="img-fluid"
                         alt="recipes"
                     />
@@ -103,7 +110,7 @@ export default function landingPage() {
                 </div>
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 318.svg"
+                        src={gambar5}
                         className="img-fluid"
                         alt="recipes"
                     />
@@ -114,7 +121,7 @@ export default function landingPage() {
                 </div>
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 319.svg"
+                        src={gambar6}
                         className="img-fluid"
                         alt="recipes"
                     />
@@ -125,7 +132,7 @@ export default function landingPage() {
                 </div>
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 320.svg"
+                        src={gambar7}
                         className="img-fluid"
                         alt="recipes"
                     />
@@ -136,7 +143,7 @@ export default function landingPage() {
                 </div>
                 <div className="pocipe-item">
                     <img
-                        src="./../../src/assets/landingPage/Rectangle 320.svg"
+                        src={gambar7}
                         className="img-fluid"
                         alt="recipes"
                     />

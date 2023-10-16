@@ -163,7 +163,7 @@ export default function SearchMenu() {
                                                             10 Likes - 12 Comment - 3 Bookmark
                                                         </button>
                                                         <br />
-                                                        <img
+                                                        {/* <img
                                                             src="./../../src/assets/pic-oke.jpeg"
                                                             width="50px"
                                                             height="50px"
@@ -175,7 +175,7 @@ export default function SearchMenu() {
                                                             <small className="text-body-secondary">
                                                                 Last updated 3 mins ago
                                                             </small>
-                                                        </p>
+                                                        </p> */}
                                                     </div>
                                                 </div>
                                             </div>
