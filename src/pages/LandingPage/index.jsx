@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import Navbar from "./../../components/Navbar"
+import gambar from "../../assets/landingPage/Rectangle 313.svg"
 
 
 export default function landingPage() {
@@ -27,7 +28,7 @@ export default function landingPage() {
                 <div className="col">
                     <img
                         className="discover-img img-fluid"
-                        src="./../../src/assets/landingPage/Rectangle 313.svg"
+                        src={gambar}
                         alt="discover"
                     />
                 </div>
